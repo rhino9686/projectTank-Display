@@ -12,5 +12,11 @@ export class XBeeHandler {
             module: 'ZigBee'
         });
     }
+
+    sendMessage(): void {
+    }
+
+
+
 }
 
