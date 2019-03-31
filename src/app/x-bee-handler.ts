@@ -16,7 +16,21 @@ export class XBeeHandler {
     sendMessage(): void {
     }
 
+    getMyAddress(): string {
+        let addr: string;
+        this.xbee.localCommand({
+            // ATMY
+            // get my 16 bit address
+            command: 'MY'
+        }).subscribe(function (response) {
+            // response will be an array of two bytes, e.g. [ 23, 167 ]
+            addr = response;
+        }, function (e) {
+            addr = 'no address found!';
+        });
 
+        return addr;
+    }
 
 }
 

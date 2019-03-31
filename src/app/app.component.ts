@@ -14,7 +14,7 @@ export class AppComponent {
   private xbee: XBeeHandler;
 
   constructor() {
-    this.xbee = new XBeeHandler('geef');
+    this.xbee = new XBeeHandler('/dev/tty.usbserial-AL02BYQV');
   }
 
 
