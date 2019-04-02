@@ -11,10 +11,10 @@ import { XBeeHandler } from './x-bee-handler';
 export class AppComponent {
   title = 'displayProject';
   clickMessage: string;
-  private xbee: XBeeHandler;
+  xbee;
 
   constructor() {
-    this.xbee = new XBeeHandler('/dev/tty.usbserial-AL02BYQV');
+
   }
 
 

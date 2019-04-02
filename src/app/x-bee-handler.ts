@@ -1,11 +1,24 @@
-const xbeeRx = require('xbee-rx');
+import xbeeRx from 'xbee-rx';
+import {} from 'electron';
+import Fs from 'fs';
 
 export class XBeeHandler {
     xbee;
 
     constructor(serialPortIn: string) {
+        let isElectron: boolean = window && window['process'] && window['process'].type;
+
+
+        if (isElectron) {
+        let fs: typeof Fs = window['require']('fs');
+        let app: Electron.App = window['require']('electron').remote;
+        console.log(fs, app, window['process']);
+
+        }
+
+
         this.xbee = xbeeRx({
-            serialport: serialPortIn,
+            serialport: '/dev/tty.usbserial-AL02BYQV',
             serialPortOptions: {
                 baudRate: 57600
             },
