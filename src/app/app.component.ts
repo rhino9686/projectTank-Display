@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import { XBeeHandler } from './x-bee-handler';
 
 
 @Component({
