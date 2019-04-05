@@ -10,7 +10,6 @@ import {MatButtonModule} from '@angular/material/button';
 export class AppComponent {
   title = 'displayProject';
   clickMessage: string;
-  xbee;
 
   constructor() {
 
