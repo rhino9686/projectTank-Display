@@ -5,6 +5,17 @@
     <input matInput [(ngModel)]="data.animal">
   </mat-form-field>
 </div>
+<mat-radio-group [(ngModel)]="color">
+        <mat-radio-button class="example-margin" value="primary">
+          Primary
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="accent">
+          Accent
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="warn">
+          Warn
+        </mat-radio-button>
+      </mat-radio-group>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>

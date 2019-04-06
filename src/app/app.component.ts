@@ -27,17 +27,18 @@ export class AppComponent {
   animal: string;
   name: string;
 
-  color = 'primary';
+  color = 'warn';
   mode = 'determinate';
   value = 50;
   bufferValue = 75;
 
-  constructor( public dialog: MatDialog, private catservice: SerialportService) {
+  constructor( public dialog: MatDialog, private serialservice: SerialportService) {
 
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
-      width: '250px',
+      width: '400px',
+      height: '350px',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -54,7 +55,7 @@ export class AppComponent {
   }
 
   getCats() {
-    this.mycats = this.catservice.getAllCats();
+    this.mycats = this.serialservice.getAllCats();
 
     this.mycats.subscribe((res) =>  {
       console.log(res);
