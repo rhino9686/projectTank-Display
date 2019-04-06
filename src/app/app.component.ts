@@ -27,6 +27,11 @@ export class AppComponent {
   animal: string;
   name: string;
 
+  color = 'primary';
+  mode = 'determinate';
+  value = 50;
+  bufferValue = 75;
+
   constructor( public dialog: MatDialog, private catservice: SerialportService) {
 
   }
