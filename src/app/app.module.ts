@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent, DialogOverviewComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, MatProgressBarModule,
-   MatCardModule, MatSliderModule, MatRadioModule} from '@angular/material';
+   MatCardModule, MatSliderModule, MatRadioModule, MatStepperModule} from '@angular/material';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -32,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatSliderModule,
     MatRadioModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
