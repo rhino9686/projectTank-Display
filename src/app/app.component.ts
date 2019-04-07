@@ -18,7 +18,7 @@ export interface DialogData {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'displayProject';
+  title = 'Lil Tanks';
   clickMessage: string;
   catString = 'nothing yet!';
   mycats: Observable<Cat[]>;
@@ -42,7 +42,7 @@ export class AppComponent {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
-      width: '700px',
+      width: '900px',
       height: '550px',
       data: {name: this.name, animal: this.animal}
     });
@@ -85,6 +85,7 @@ export class DialogOverviewComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  color: string;
 
 
   constructor(
@@ -94,7 +95,8 @@ export class DialogOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-        firstCtrl: ['', Validators.required]
+        firstCtrl: ['', Validators.required],
+        color: ['' , Validators.required]
       });
       this.secondFormGroup = this._formBuilder.group({
         secondCtrl: ['', Validators.required]

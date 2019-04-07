@@ -26,21 +26,69 @@
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Tank 1 Setup</ng-template>
+      <ng-template matStepLabel>Tank 1 Name</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        <input matInput placeholder="Name your Tank!" formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
+
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Tank 1 Abilities</ng-template>
+        <mat-radio-group  [(ngModel)]="color"  [ngModelOptions]="{standalone: true}"a >
+          <mat-radio-button class="example-margin" value="primary">
+            Faster moving
+          </mat-radio-button>
+          <mat-radio-button class="example-margin" value="accent">
+            Faster Aiming
+          </mat-radio-button>
+          <mat-radio-button class="example-margin" value="warn">
+            More Health
+          </mat-radio-button>
+        </mat-radio-group>
+
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Tank 2 Name</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Name your Tank!" formControlName="firstCtrl" required>
+      </mat-form-field>
+
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Tank 2 Setup </ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
+      <ng-template matStepLabel>Tank 2 Abilities </ng-template>
+      <mat-radio-group  [(ngModel)]="color"  [ngModelOptions]="{standalone: true}"a >
+        <mat-radio-button class="example-margin" value="primary">
+          Faster moving
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="accent">
+          Faster Aiming
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="warn">
+          More Health
+        </mat-radio-button>
+      </mat-radio-group>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
