@@ -7,7 +7,7 @@ import {MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, Mat
    MatCardModule, MatSliderModule, MatRadioModule, MatStepperModule} from '@angular/material';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     MatProgressBarModule,
     MatCardModule,
     MatSliderModule,

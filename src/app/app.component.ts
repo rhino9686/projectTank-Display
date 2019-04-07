@@ -1,8 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Cat } from './models/cat';
 import { SerialportService } from './services/serialport.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 
@@ -32,6 +33,9 @@ export class AppComponent {
   tank1value = 50;
   tank2value = 50;
   tank1bufferValue = 75;
+
+
+  subscription: Subscription;
 
   constructor( public dialog: MatDialog, private serialservice: SerialportService) {
 
@@ -76,11 +80,26 @@ export class AppComponent {
   selector: 'app-dialog-overview',
   templateUrl: 'dialog-overview.html',
 })
-export class DialogOverviewComponent {
+export class DialogOverviewComponent implements OnInit {
+
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
 
   constructor(
+    private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DialogOverviewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+        firstCtrl: ['', Validators.required]
+      });
+      this.secondFormGroup = this._formBuilder.group({
+        secondCtrl: ['', Validators.required]
+      });
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
