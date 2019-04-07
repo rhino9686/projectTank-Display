@@ -10,18 +10,21 @@ import { Cat } from '../models/cat';
   providedIn: 'root'
 })
 export class SerialportService {
-  subject: Subject<number>;
+  public subject: Subject<number>;
   timer: any;
   isActive = false;
+  num: number;
 
   constructor(private http: HttpClient) { }
 
   activate(): void {
     this.isActive = true;
-    this.timer = interval(1000);
-    this.timer.pipe(this.subject);
+    this.timer = interval(1000).subscribe(
+      (val) => { this.getTankOneHealth('test').subscribe(
+         (data) => {this.subject.next(data);
+        });
+      });
 
-    this.timer.subscribe(val => console.log(val));
   }
 
   getAllCats(): Observable<Cat[]> {
@@ -48,8 +51,8 @@ export class SerialportService {
     return this.http.delete('http://localhost:8000/api/cats/' + name);
   }
 
-  getTankOneHealth(name: string): Observable<Number> {
-    return this.http.get<Number>(
+  getTankOneHealth(name: string): Observable<number> {
+    return this.http.get<number>(
       'http://localhost:8000/api/cats/'
     );
   }

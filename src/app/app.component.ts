@@ -17,7 +17,7 @@ export interface DialogData {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Lil Tanks';
   catString = 'nothing yet!';
   mycats: Observable<Cat[]>;
@@ -34,11 +34,15 @@ export class AppComponent {
   tank1bufferValue = 75;
 
 
-  subscription: Subscription;
 
   constructor( public dialog: MatDialog, private serialservice: SerialportService) {
 
   }
+
+  ngOnInit(): void {
+    this.serialservice.subject.subscribe(val => { this.tank1value = val; });
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '900px',
