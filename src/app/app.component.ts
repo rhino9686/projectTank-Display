@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Cat } from './models/cat';
 import { SerialportService } from './services/serialport.service';
 import { Observable, Subscription } from 'rxjs';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -19,7 +19,6 @@ export interface DialogData {
 })
 export class AppComponent {
   title = 'Lil Tanks';
-  clickMessage: string;
   catString = 'nothing yet!';
   mycats: Observable<Cat[]>;
   cats: Cat[];
@@ -55,7 +54,6 @@ export class AppComponent {
    }
 
   onClickMe() {
-    this.clickMessage = 'You are my hero!';
     this.getCats();
   }
 
@@ -86,6 +84,11 @@ export class DialogOverviewComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   color: string;
+
+  firstTankName: string;
+  secondTankName: string;
+  firstTankPowerUp: string;
+  secondTankPowerUp: string;
 
 
   constructor(

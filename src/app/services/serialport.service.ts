@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, interval } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Cat } from '../models/cat';
 
@@ -10,9 +10,19 @@ import { Cat } from '../models/cat';
   providedIn: 'root'
 })
 export class SerialportService {
+  subject: Subject<number>;
+  timer: any;
+  isActive = false;
 
   constructor(private http: HttpClient) { }
 
+  activate(): void {
+    this.isActive = true;
+    this.timer = interval(1000);
+    this.timer.pipe(this.subject);
+
+    this.timer.subscribe(val => console.log(val));
+  }
 
   getAllCats(): Observable<Cat[]> {
     return this.http.get<Cat[]>('http://localhost:8000/api/cats');
