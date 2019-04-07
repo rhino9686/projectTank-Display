@@ -29,8 +29,9 @@ export class AppComponent {
 
   color = 'warn';
   mode = 'determinate';
-  value = 50;
-  bufferValue = 75;
+  tank1value = 50;
+  tank2value = 50;
+  tank1bufferValue = 75;
 
   constructor( public dialog: MatDialog, private serialservice: SerialportService) {
 

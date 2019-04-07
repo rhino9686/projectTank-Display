@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Tank 1 Setup </h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>What's your name?</p>
   <mat-form-field>
     <input matInput [(ngModel)]="data.animal">
   </mat-form-field>
@@ -17,6 +17,6 @@
         </mat-radio-button>
       </mat-radio-group>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
 </div>

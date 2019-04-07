@@ -2,85 +2,36 @@
 <div style="text-align:center">
  
 
-   <button (click)="onClickMe()">Forward</button>
-   <button mat-fab color="primary">Get Cats</button>
-
-   <h3> {{ catString }} </h3>
+   <button (click)="onClickMe()">Get Data</button>
+   <h4> {{ catString }} </h4>
 
 </div>
-<ol>
-    <li>
-      <mat-form-field>
-        <input matInput [(ngModel)]="name" placeholder="What's your name?">
-      </mat-form-field>
-    </li>
-    <li>
-      <button mat-raised-button (click)="openDialog()">Pick one</button>
-    </li>
-    <li *ngIf="animal">
-      You chose: <i>{{animal}}</i>
-    </li>
-  </ol>
+
+      <button mat-raised-button (click)="openDialog()">Open Dialog</button>
+
 
   <mat-card>
       <mat-card-content>
         <h2 class="example-h2">Tank 1 </h2>
     
-        <section class="example-section">
-          <label class="example-margin">Color:</label>
-          <mat-radio-group [(ngModel)]="color">
-            <mat-radio-button class="example-margin" value="primary">
-              Primary
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="accent">
-              Accent
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="warn">
-              Warn
-            </mat-radio-button>
-          </mat-radio-group>
-        </section>
-    
-        <section class="example-section">
-          <label class="example-margin">Mode:</label>
-          <mat-radio-group [(ngModel)]="mode">
-            <mat-radio-button class="example-margin" value="determinate">
-              Determinate
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="indeterminate">
-              Indeterminate
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="buffer">
-              Buffer
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="query">
-              Query
-            </mat-radio-button>
-          </mat-radio-group>
-        </section>
-    
         <section class="example-section" *ngIf="mode === 'determinate' || mode === 'buffer'">
           <label class="example-margin">Progress:</label>
-          <mat-slider class="example-margin" [(ngModel)]="value"></mat-slider>
-        </section>
-        <section class="example-section" *ngIf="mode === 'buffer'">
-          <label class="example-margin">Buffer:</label>
-          <mat-slider class="example-margin" [(ngModel)]="bufferValue"></mat-slider>
+          <mat-slider class="example-margin" [(ngModel)]="tank1value"></mat-slider>
         </section>
       </mat-card-content>
     </mat-card>
     
     <mat-card>
       <mat-card-content>
-        <h2 class="example-h2">Health</h2>
+        <h3 class="example-h2">Health</h3>
     
         <section class="example-section">
           <mat-progress-bar
               class="example-margin"
               [color]="color"
               [mode]="mode"
-              [value]="value"
-              [bufferValue]="bufferValue">
+              [value]="tank1value"
+              [bufferValue]="tank1bufferValue">
           </mat-progress-bar>
         </section>
       </mat-card-content>
@@ -91,60 +42,24 @@
         <mat-card-content>
           <h2 class="example-h2">Tank 2 </h2>
       
-          <section class="example-section">
-            <label class="example-margin">Color:</label>
-            <mat-radio-group [(ngModel)]="color">
-              <mat-radio-button class="example-margin" value="primary">
-                Primary
-              </mat-radio-button>
-              <mat-radio-button class="example-margin" value="accent">
-                Accent
-              </mat-radio-button>
-              <mat-radio-button class="example-margin" value="warn">
-                Warn
-              </mat-radio-button>
-            </mat-radio-group>
-          </section>
-      
-          <section class="example-section">
-            <label class="example-margin">Mode:</label>
-            <mat-radio-group [(ngModel)]="mode">
-              <mat-radio-button class="example-margin" value="determinate">
-                Determinate
-              </mat-radio-button>
-              <mat-radio-button class="example-margin" value="indeterminate">
-                Indeterminate
-              </mat-radio-button>
-              <mat-radio-button class="example-margin" value="buffer">
-                Buffer
-              </mat-radio-button>
-              <mat-radio-button class="example-margin" value="query">
-                Query
-              </mat-radio-button>
-            </mat-radio-group>
-          </section>
       
           <section class="example-section" *ngIf="mode === 'determinate' || mode === 'buffer'">
             <label class="example-margin">Progress:</label>
-            <mat-slider class="example-margin" [(ngModel)]="value"></mat-slider>
-          </section>
-          <section class="example-section" *ngIf="mode === 'buffer'">
-            <label class="example-margin">Buffer:</label>
-            <mat-slider class="example-margin" [(ngModel)]="bufferValue"></mat-slider>
+            <mat-slider class="example-margin" [(ngModel)]="tank2value"></mat-slider>
           </section>
         </mat-card-content>
       </mat-card>
       
       <mat-card>
         <mat-card-content>
-          <h2 class="example-h2">Health</h2>
+          <h3 class="example-h2">Health</h3>
       
           <section class="example-section">
             <mat-progress-bar
                 class="example-margin"
                 [color]="color"
                 [mode]="mode"
-                [value]="value"
+                [value]="tank2value"
                 [bufferValue]="bufferValue">
             </mat-progress-bar>
           </section>
