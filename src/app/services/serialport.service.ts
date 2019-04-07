@@ -38,4 +38,10 @@ export class SerialportService {
     return this.http.delete('http://localhost:8000/api/cats/' + name);
   }
 
+  getTankOneHealth(name: string): Observable<Number> {
+    return this.http.get<Number>(
+      'http://localhost:8000/api/cats/'
+    );
+  }
+
 }
