@@ -40,7 +40,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.serialservice.subject.subscribe(val => { this.tank1value = val; });
+    this.serialservice.tankOneSubject.subscribe(val => { this.tank1value = val; });
+    this.serialservice.tankTwoSubject.subscribe(val => { this.tank1value = val; });
   }
 
   openDialog(): void {

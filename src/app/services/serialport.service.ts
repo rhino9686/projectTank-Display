@@ -10,8 +10,11 @@ import { Cat } from '../models/cat';
   providedIn: 'root'
 })
 export class SerialportService {
-  public subject: Subject<number>;
-  timer: any;
+  public tankOneSubject: Subject<number>;
+  public tankTwoSubject: Subject<number>;
+
+  tankOneTimer: any;
+  tankTwoTimer: any;
   isActive = false;
   num: number;
 
@@ -19,11 +22,16 @@ export class SerialportService {
 
   activate(): void {
     this.isActive = true;
-    this.timer = interval(1000).subscribe(
-      (val) => { this.getTankOneHealth('test').subscribe(
-         (data) => {this.subject.next(data);
+    this.tankOneTimer = interval(1000).subscribe(
+      (val) => { this.getTankOneHealth('one').subscribe(
+         (data) => {this.tankOneSubject.next(data);
         });
       });
+      this.tankTwoTimer = interval(1000).subscribe(
+        (val) => { this.getTankTwoHealth('two').subscribe(
+           (data) => {this.tankTwoSubject.next(data);
+          });
+        });
 
   }
 
@@ -53,7 +61,13 @@ export class SerialportService {
 
   getTankOneHealth(name: string): Observable<number> {
     return this.http.get<number>(
-      'http://localhost:8000/api/cats/'
+      'http://localhost:8000/api/tankOne/'
+    );
+  }
+
+  getTankTwoHealth(name: string): Observable<number> {
+    return this.http.get<number>(
+      'http://localhost:8000/api/tankTwo/'
     );
   }
 
