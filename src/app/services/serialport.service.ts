@@ -5,7 +5,6 @@ import { Cat } from '../models/cat';
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +26,7 @@ export class SerialportService {
          (data) => {this.tankOneSubject.next(data);
         });
       });
+
       this.tankTwoTimer = interval(1000).subscribe(
         (val) => { this.getTankTwoHealth('two').subscribe(
            (data) => {this.tankTwoSubject.next(data);

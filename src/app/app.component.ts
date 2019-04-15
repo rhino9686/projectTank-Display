@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Cat } from './models/cat';
 import { SerialportService } from './services/serialport.service';
 import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor( public dialog: MatDialog, private serialservice: SerialportService) {
+  constructor( public dialog: MatDialog, private serialservice: SerialportService, private snackbar: MatSnackBar) {
 
   }
 

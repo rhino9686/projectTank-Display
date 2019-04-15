@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent, DialogOverviewComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, MatProgressBarModule,
-   MatCardModule, MatSliderModule, MatRadioModule, MatStepperModule} from '@angular/material';
+   MatCardModule, MatSliderModule, MatRadioModule, MatStepperModule, MatIconModule, MatSnackBarModule} from '@angular/material';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,7 +33,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatSliderModule,
     MatRadioModule,
-    MatStepperModule
+    MatStepperModule,
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
