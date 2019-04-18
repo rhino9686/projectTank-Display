@@ -4,18 +4,18 @@
 
 </div>
 <div class="healthStats"  >
-  <mat-card class="card">
+  <mat-card class="cardTankOne">
       <mat-card-content>
         <h2 class="example-h2">Tank 1 </h2>
     
         <section class="example-section" *ngIf="mode === 'determinate' || mode === 'buffer'">
-          <label class="example-margin">Progress:</label>
+          <label class="example-margin">Points:</label>
           <mat-slider class="example-margin" [(ngModel)]="tank1value"></mat-slider>
         </section>
       </mat-card-content>
     </mat-card>
     
-    <mat-card class="card">
+    <mat-card class="cardTankOne">
       <mat-card-content>
         <h3 class="example-h2">Health</h3>
     
@@ -32,19 +32,19 @@
     </mat-card>
 
 
-    <mat-card class="card">
+    <mat-card class="cardTankTwo">
         <mat-card-content>
           <h2 class="example-h2">Tank 2 </h2>
       
       
           <section class="example-section" *ngIf="mode === 'determinate' || mode === 'buffer'">
-            <label class="example-margin">Progress:</label>
+            <label class="example-margin">Points:</label>
             <mat-slider class="example-margin" [(ngModel)]="tank2value"></mat-slider>
           </section>
         </mat-card-content>
       </mat-card>
       
-      <mat-card class="card">
+      <mat-card class="cardTankTwo">
         <mat-card-content>
           <h3 class="example-h2">Health</h3>
       

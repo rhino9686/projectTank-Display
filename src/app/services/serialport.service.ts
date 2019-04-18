@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Cat } from '../models/cat';
+import { Setup } from '../models/setup';
 
 
 
@@ -27,11 +28,11 @@ export class SerialportService {
         });
       });
 
-      this.tankTwoTimer = interval(1000).subscribe(
+     /* this.tankTwoTimer = interval(1000).subscribe(
         (val) => { this.getTankTwoHealth('two').subscribe(
            (data) => {this.tankTwoSubject.next(data);
           });
-        });
+        });*/
 
   }
 
@@ -70,5 +71,16 @@ export class SerialportService {
       'http://localhost:8000/api/tankTwo/'
     );
   }
+
+  sendSetupTankOne(setup: Setup): Observable<boolean> {
+    return this.http.put<boolean>(
+      'http://localhost:8000/api/tankOne/' + setup.type, setup );
+  }
+
+  sendSetupTankTwo(setup: Setup): Observable<boolean> {
+    return this.http.put<boolean>(
+      'http://localhost:8000/api/tankTwo/' + setup.type, setup );
+  }
+
 
 }
