@@ -9,8 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  tankOneName: string;
+  tankOnePower: string;
+  tankTwoName: string;
+  tankTwoPower: string;
 }
 
 @Component({
@@ -25,14 +27,20 @@ export class AppComponent implements OnInit {
   cats: Cat[];
   mycat: Cat;
 
-  animal: string;
-  name: string;
 
+  // Health Bar Settings
   color = 'warn';
   mode = 'determinate';
   tank1value = 50;
   tank2value = 50;
   tank1bufferValue = 75;
+
+  // Tank Parameters
+  tankOneName: string;
+  tankOnePower: string;
+  tankTwoName: string;
+  tankTwoPower: string;
+
 
 
 
@@ -41,20 +49,26 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.serialservice.tankOneSubject.subscribe(val => { this.tank1value = val; });
-    this.serialservice.tankTwoSubject.subscribe(val => { this.tank2value = val; });
+    // this.serialservice.tankOneSubject.subscribe(val => { this.tank1value = val; });
+    // this.serialservice.tankTwoSubject.subscribe(val => { this.tank2value = val; });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '900px',
       height: '550px',
-      data: {name: this.name, animal: this.animal}
+      data: {tankOneName: this.tankOneName, tankOnePower: this.tankOnePower, tankTwoName: this.tankTwoName,
+         tankTwoPower: this.tankTwoPower
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result);
+      this.tankOneName = result.tankOneName;
+      this.tankTwoName = result.tankTwoName;
+      this.tankOnePower = result.tankOnePower;
+      this.tankTwoPower = result.tankTwoPower;
     });
 
    }
@@ -76,6 +90,13 @@ export class AppComponent implements OnInit {
       this.catString = this.mycat.name;
 
     });
+  }
+
+  printTankData() {
+    console.log('Tank One Name: ' + this.tankOneName);
+    console.log('Tank Two Name: ' + this.tankTwoName);
+    console.log('Tank One Power ' + this.tankOnePower);
+    console.log('Tank Two Power: ' + this.tankTwoPower);
   }
 
 }

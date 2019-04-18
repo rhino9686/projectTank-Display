@@ -28,7 +28,7 @@
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Tank 1 Name</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Name your Tank!" formControlName="firstCtrl" required>
+        <input matInput placeholder="Name your Tank!" [(ngModel)]="data.tankOneName"  formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
@@ -40,14 +40,14 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Tank 1 Abilities</ng-template>
-        <mat-radio-group  [(ngModel)]="color"  [ngModelOptions]="{standalone: true}"a >
-          <mat-radio-button class="example-margin" value="primary">
+        <mat-radio-group  [(ngModel)]="data.tankOnePower"  [ngModelOptions]="{standalone: true}"a >
+          <mat-radio-button class="example-margin" value="fastMove">
             Faster moving
           </mat-radio-button>
-          <mat-radio-button class="example-margin" value="accent">
+          <mat-radio-button class="example-margin" value="fastAim">
             Faster Aiming
           </mat-radio-button>
-          <mat-radio-button class="example-margin" value="warn">
+          <mat-radio-button class="example-margin" value="moreHealth">
             More Health
           </mat-radio-button>
         </mat-radio-group>
@@ -64,7 +64,7 @@
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Tank 2 Name</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Name your Tank!" formControlName="firstCtrl" required>
+        <input matInput placeholder="Name your Tank!" [(ngModel)]="data.tankTwoName"  formControlName="firstCtrl" required>
       </mat-form-field>
 
 
@@ -78,14 +78,14 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Tank 2 Abilities </ng-template>
-      <mat-radio-group  [(ngModel)]="color"  [ngModelOptions]="{standalone: true}"a >
-        <mat-radio-button class="example-margin" value="primary">
+      <mat-radio-group  [(ngModel)]="data.tankTwoPower"  [ngModelOptions]="{standalone: true}"a >
+        <mat-radio-button class="example-margin" value="fastMove">
           Faster moving
         </mat-radio-button>
-        <mat-radio-button class="example-margin" value="accent">
+        <mat-radio-button class="example-margin" value="fastAim">
           Faster Aiming
         </mat-radio-button>
-        <mat-radio-button class="example-margin" value="warn">
+        <mat-radio-button class="example-margin" value="moreHealth">
           More Health
         </mat-radio-button>
       </mat-radio-group>
@@ -101,7 +101,7 @@
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Done</button>
+      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Done</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
