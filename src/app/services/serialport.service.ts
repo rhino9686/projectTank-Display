@@ -18,7 +18,10 @@ export class SerialportService {
   isActive = false;
   num: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.tankOneSubject = new Subject<number>();
+    this.tankTwoSubject = new Subject<number>();
+  }
 
   activate(): void {
     this.isActive = true;
@@ -74,12 +77,12 @@ export class SerialportService {
 
   sendSetupTankOne(setup: Setup): Observable<boolean> {
     return this.http.put<boolean>(
-      'http://localhost:8000/api/tankOne/' + setup.type, setup );
+      'http://localhost:8000/api/tankOne/setup', setup );
   }
 
   sendSetupTankTwo(setup: Setup): Observable<boolean> {
     return this.http.put<boolean>(
-      'http://localhost:8000/api/tankTwo/' + setup.type, setup );
+      'http://localhost:8000/api/tankTwo/setup', setup );
   }
 
 

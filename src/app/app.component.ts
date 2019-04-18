@@ -4,6 +4,7 @@ import { Cat } from './models/cat';
 import { SerialportService } from './services/serialport.service';
 import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Setup } from './models/setup';
 
 
 
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   mycats: Observable<Cat[]>;
   cats: Cat[];
   mycat: Cat;
+  setup: Setup;
 
 
   // Health Bar Settings
@@ -49,15 +51,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.serialservice.tankOneSubject.subscribe(val => { this.tank1value = val; });
-    // this.serialservice.tankTwoSubject.subscribe(val => { this.tank2value = val; });
+     this.serialservice.tankOneSubject.subscribe(val => { this.tank1value = val; });
+     this.serialservice.tankTwoSubject.subscribe(val => { this.tank2value = val; });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '900px',
       height: '550px',
-      data: {tankOneName: this.tankOneName, tankOnePower: this.tankOnePower, tankTwoName: this.tankTwoName,
+      data: {tankOneName: ' ' , tankOnePower: this.tankOnePower, tankTwoName: this.tankTwoName,
          tankTwoPower: this.tankTwoPower
       }
     });
@@ -79,17 +81,6 @@ export class AppComponent implements OnInit {
 
   getCats() {
     this.mycats = this.serialservice.getAllCats();
-
-    this.mycats.subscribe((res) =>  {
-      console.log(res);
-
-      this.cats = res['cats'];
-      console.log(this.cats);
-      console.log(this.cats[0]);
-      this.mycat = this.cats[0];
-      this.catString = this.mycat.name;
-
-    });
   }
 
   printTankData() {
@@ -97,6 +88,53 @@ export class AppComponent implements OnInit {
     console.log('Tank Two Name: ' + this.tankTwoName);
     console.log('Tank One Power ' + this.tankOnePower);
     console.log('Tank Two Power: ' + this.tankTwoPower);
+  }
+
+  initTanks() {
+    this.initTankOne();
+    this.initTankTwo();
+  }
+
+  initTankOne() {
+    let powType = -3;
+
+    if (this.tankOnePower === 'moreHealth') {
+      powType = 1;
+    } else if (this.tankOnePower === 'fastMove') {
+      powType = 2;
+    } else if (this.tankOnePower === 'fastAim') {
+      powType = 3;
+    }
+    if (powType < 0) {
+      console.log('ERROR: no power');
+      return;
+    }
+
+    this.setup = { type: powType };
+    this.serialservice.sendSetupTankOne(this.setup);
+  }
+
+  initTankTwo() {
+    let powType = -3;
+
+    if (this.tankTwoPower === 'moreHealth') {
+      powType = 1;
+    } else if (this.tankTwoPower === 'fastMove') {
+      powType = 2;
+    } else if (this.tankTwoPower === 'fastAim') {
+      powType = 3;
+    }
+    if (powType < 0) {
+      console.log('ERROR: no power');
+      return;
+    }
+
+    this.setup = { type: powType };
+    this.serialservice.sendSetupTankOne(this.setup);
+  }
+
+  testConnection() {
+    this.initTankOne();
   }
 
 }
@@ -111,11 +149,6 @@ export class DialogOverviewComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   color: string;
-
-  firstTankName: string;
-  secondTankName: string;
-  firstTankPowerUp: string;
-  secondTankPowerUp: string;
 
 
   constructor(
