@@ -8,7 +8,6 @@ import { Setup } from './models/setup';
 
 
 
-
 export interface DialogData {
   tankOneName: string;
   tankOnePower: string;
@@ -51,8 +50,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.serialservice.tankOneSubject.subscribe(val => { this.tank1value = val; });
-     this.serialservice.tankTwoSubject.subscribe(val => { this.tank2value = val; });
+     this.serialservice.tankOneSubject.subscribe(val => { this.updateTankOneHealth(val); });
+     this.serialservice.tankTwoSubject.subscribe(val => { this.updateTankTwoHealth(val); });
   }
 
   openDialog(): void {
@@ -89,6 +88,17 @@ export class AppComponent implements OnInit {
     console.log('Tank One Power ' + this.tankOnePower);
     console.log('Tank Two Power: ' + this.tankTwoPower);
   }
+  updateTankOneHealth(healthObj: any ) {
+      const num = healthObj['health'];
+      console.log(num);
+      this.tank1value = num;
+  }
+
+  updateTankTwoHealth(healthObj: any ) {
+    const num = healthObj['health'];
+    console.log(num);
+  }
+
 
   initTanks() {
     this.initTankOne();
@@ -134,7 +144,9 @@ export class AppComponent implements OnInit {
   }
 
   testConnection() {
-    this.initTankOne();
+      this.serialservice.getTankOneHealth('yeet').subscribe((val) => console.log(val) );
+      this.serialservice.activate();
+   // this.initTankOne();
   }
 
 }
@@ -142,6 +154,7 @@ export class AppComponent implements OnInit {
 @Component({
   selector: 'app-dialog-overview',
   templateUrl: 'dialog-overview.html',
+  styleUrls: ['dialog-overview.css']
 })
 export class DialogOverviewComponent implements OnInit {
 

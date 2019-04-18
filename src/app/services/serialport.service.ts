@@ -9,6 +9,7 @@ import { Setup } from '../models/setup';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SerialportService {
   public tankOneSubject: Subject<number>;
   public tankTwoSubject: Subject<number>;
@@ -23,9 +24,10 @@ export class SerialportService {
     this.tankTwoSubject = new Subject<number>();
   }
 
+  // Starts polling the server for tank health
   activate(): void {
     this.isActive = true;
-    this.tankOneTimer = interval(1000).subscribe(
+    this.tankOneTimer = interval(2000).subscribe(
       (val) => { this.getTankOneHealth('one').subscribe(
          (data) => {this.tankOneSubject.next(data);
         });
@@ -37,6 +39,15 @@ export class SerialportService {
           });
         });*/
 
+  }
+  // Stops polling the server for tank health
+  deactivate(): void {
+    if (!this.isActive) {
+      return;
+    }
+    this.tankOneTimer = null;
+    this.tankTwoTimer = null;
+    this.isActive = false;
   }
 
   getAllCats(): Observable<Cat[]> {
