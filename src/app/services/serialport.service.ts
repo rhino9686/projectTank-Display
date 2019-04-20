@@ -50,29 +50,8 @@ export class SerialportService {
     this.isActive = false;
   }
 
-  getAllCats(): Observable<Cat[]> {
-    return this.http.get<Cat[]>('http://localhost:8000/api/cats');
-  }
-
-  getCat(name: string): Observable<Cat> {
-    return this.http.get<Cat>('http://localhost:8000/api/cats/' + name);
-  }
-
-  insertCat(cat: Cat): Observable<Cat> {
-    return this.http.post<Cat>('http://localhost:8000/api/cats/', cat);
-  }
 
 
-  updateCat(cat: Cat): Observable<void> {
-    return this.http.put<void>(
-      'http://localhost:8000/api/cats/' + cat.name,
-      cat
-    );
-  }
-
-  deleteCat(name: string) {
-    return this.http.delete('http://localhost:8000/api/cats/' + name);
-  }
 
   getTankOneHealth(name: string): Observable<number> {
     return this.http.get<number>(
@@ -86,14 +65,15 @@ export class SerialportService {
     );
   }
 
-  sendSetupTankOne(setup: Setup): Observable<boolean> {
-    return this.http.put<boolean>(
-      'http://localhost:8000/api/tankOne/setup', setup );
+  sendSetupTankOne(setup: Setup): Observable<Setup> {
+    console.log('attempting send');
+    return this.http.post<Setup>(
+      'http://localhost:8000/api/tankOne/setup/', setup );
   }
 
   sendSetupTankTwo(setup: Setup): Observable<boolean> {
     return this.http.put<boolean>(
-      'http://localhost:8000/api/tankTwo/setup', setup );
+      'http://localhost:8000/api/tankTwo/setup/', setup );
   }
 
 

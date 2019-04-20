@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   // Health Bar Settings
   color = 'warn';
   mode = 'determinate';
-  tank1value = 50;
+  tank1value = 75;
   tank2value = 50;
   tank1bufferValue = 75;
 
@@ -50,15 +50,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.serialservice.tankOneSubject.subscribe(val => { this.updateTankOneHealth(val); });
-     this.serialservice.tankTwoSubject.subscribe(val => { this.updateTankTwoHealth(val); });
+     this.serialservice.tankOneSubject.subscribe(val => { this.updateTankOne(val); });
+     this.serialservice.tankTwoSubject.subscribe(val => { this.updateTankTwo(val); });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '900px',
       height: '550px',
-      data: {tankOneName: ' ' , tankOnePower: this.tankOnePower, tankTwoName: this.tankTwoName,
+      data: {tankOneName: this.tankOneName , tankOnePower: this.tankOnePower, tankTwoName: this.tankTwoName,
          tankTwoPower: this.tankTwoPower
       }
     });
@@ -74,13 +74,6 @@ export class AppComponent implements OnInit {
 
    }
 
-  onClickMe() {
-    this.getCats();
-  }
-
-  getCats() {
-    this.mycats = this.serialservice.getAllCats();
-  }
 
   printTankData() {
     console.log('Tank One Name: ' + this.tankOneName);
@@ -88,13 +81,13 @@ export class AppComponent implements OnInit {
     console.log('Tank One Power ' + this.tankOnePower);
     console.log('Tank Two Power: ' + this.tankTwoPower);
   }
-  updateTankOneHealth(healthObj: any ) {
+  updateTankOne(healthObj: any ) {
       const num = healthObj['health'];
       console.log(num);
       this.tank1value = num;
   }
 
-  updateTankTwoHealth(healthObj: any ) {
+  updateTankTwo(healthObj: any ) {
     const num = healthObj['health'];
     console.log(num);
   }
@@ -103,6 +96,7 @@ export class AppComponent implements OnInit {
   initTanks() {
     this.initTankOne();
     this.initTankTwo();
+    this.serialservice.activate();
   }
 
   initTankOne() {
@@ -116,12 +110,12 @@ export class AppComponent implements OnInit {
       powType = 3;
     }
     if (powType < 0) {
-      console.log('ERROR: no power');
+      console.log('ERROR: no power choice for tank one!');
       return;
     }
 
     this.setup = { type: powType };
-    this.serialservice.sendSetupTankOne(this.setup);
+    this.serialservice.sendSetupTankOne(this.setup).subscribe((res) => {console.log(res); });
   }
 
   initTankTwo() {
@@ -135,18 +129,18 @@ export class AppComponent implements OnInit {
       powType = 3;
     }
     if (powType < 0) {
-      console.log('ERROR: no power');
+      console.log('ERROR: no power choice for tank two!');
       return;
     }
 
     this.setup = { type: powType };
-    this.serialservice.sendSetupTankOne(this.setup);
+    this.serialservice.sendSetupTankTwo(this.setup);
   }
 
   testConnection() {
-      this.serialservice.getTankOneHealth('yeet').subscribe((val) => console.log(val) );
-      this.serialservice.activate();
-   // this.initTankOne();
+     // this.serialservice.getTankOneHealth('yeet').subscribe((val) => console.log(val) );
+    //  this.serialservice.activate();
+    this.initTankOne();
   }
 
 }
