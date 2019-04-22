@@ -198,8 +198,8 @@ export class AppComponent implements OnInit {
   }
 
   tankOneWins() {
-    if (this.gameDone = true ) {
-      //return;
+    if (this.gameDone === true ) {
+      return;
     }
     const dialogRef = this.dialog2.open(WinnerDialogComponent, {
       width: '460px',
@@ -210,8 +210,8 @@ export class AppComponent implements OnInit {
   }
 
   tankTwoWins() {
-    if (this.gameDone = true ) {
-      //return;
+    if (this.gameDone === true ) {
+      return;
     }
     const dialogRef = this.dialog2.open(WinnerDialogComponent, {
       width: '460px',
