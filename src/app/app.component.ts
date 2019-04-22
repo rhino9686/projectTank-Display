@@ -45,12 +45,16 @@ export class AppComponent implements OnInit {
   tankOneColor: string;
   tankTwoColor: string;
 
+  // Game State
+  gameDone: boolean;
+
   constructor( public dialog: MatDialog, public dialog2: MatDialog,
      private serialservice: SerialportService, private snackbar: MatSnackBar) {
 
   }
 
   ngOnInit(): void {
+     this.gameDone = false;
      this.serialservice.tankOneSubject.subscribe(val => { this.updateTankOne(val); });
      this.serialservice.tankTwoSubject.subscribe(val => { this.updateTankTwo(val); });
   }
@@ -74,6 +78,7 @@ export class AppComponent implements OnInit {
       this.tankOneColor = result.tankOneColor;
       this.tankTwoColor = result.tankTwoColor;
       this.printTankData();
+      this.gameDone = false;
     });
 
    }
@@ -193,20 +198,27 @@ export class AppComponent implements OnInit {
   }
 
   tankOneWins() {
+    if (this.gameDone = true ) {
+      //return;
+    }
     const dialogRef = this.dialog2.open(WinnerDialogComponent, {
       width: '460px',
       height: '100px',
       data: { winner: this.tankOneName }
     });
+    this.gameDone = true;
   }
 
   tankTwoWins() {
+    if (this.gameDone = true ) {
+      //return;
+    }
     const dialogRef = this.dialog2.open(WinnerDialogComponent, {
       width: '460px',
       height: '100px',
       data: { winner: this.tankTwoName }
     });
-
+    this.gameDone = true;
   }
 
 }
@@ -230,7 +242,7 @@ export class DialogOverviewComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit() {
-    this.data.tankOneName = '';
+
     this.firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
         color: ['' , Validators.required]
