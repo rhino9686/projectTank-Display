@@ -17,6 +17,10 @@ export interface DialogData {
   tankTwoColor: string;
 }
 
+export interface WinnerData {
+  winner: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,7 +45,8 @@ export class AppComponent implements OnInit {
   tankOneColor: string;
   tankTwoColor: string;
 
-  constructor( public dialog: MatDialog, private serialservice: SerialportService, private snackbar: MatSnackBar) {
+  constructor( public dialog: MatDialog, public dialog2: MatDialog,
+     private serialservice: SerialportService, private snackbar: MatSnackBar) {
 
   }
 
@@ -188,10 +193,19 @@ export class AppComponent implements OnInit {
   }
 
   tankOneWins() {
-
+    const dialogRef = this.dialog2.open(WinnerDialogComponent, {
+      width: '460px',
+      height: '100px',
+      data: { winner: this.tankOneName }
+    });
   }
 
   tankTwoWins() {
+    const dialogRef = this.dialog2.open(WinnerDialogComponent, {
+      width: '460px',
+      height: '100px',
+      data: { winner: this.tankTwoName }
+    });
 
   }
 
@@ -224,6 +238,26 @@ export class DialogOverviewComponent implements OnInit {
       this.secondFormGroup = this._formBuilder.group({
         secondCtrl: ['', Validators.required]
       });
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+
+@Component({
+  selector: 'app-winner-dialog',
+  templateUrl: 'winner-dialog.html',
+})
+export class WinnerDialogComponent implements OnInit {
+
+  constructor(
+    public dialogRef: MatDialogRef<WinnerDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: WinnerData) {}
+
+  ngOnInit() {
     }
 
   onNoClick(): void {
