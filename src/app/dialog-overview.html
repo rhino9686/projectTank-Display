@@ -20,9 +20,6 @@
 
 </div> -->
 
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -39,7 +36,7 @@
 
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Tank 1 Abilities</ng-template>
+      <ng-template matStepLabel>Abilities</ng-template>
         <mat-radio-group  [(ngModel)]="data.tankOnePower"  [ngModelOptions]="{standalone: true}"a >
           <mat-radio-button class="example-margin" value="fastMove">
             Faster moving
@@ -51,6 +48,31 @@
             More Health
           </mat-radio-button>
         </mat-radio-group>
+
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Color</ng-template>
+        <mat-radio-group  [(ngModel)]="data.tankOneColor"  [ngModelOptions]="{standalone: true}"a >
+          <mat-radio-button class="example-margin" value="green">
+            Green
+          </mat-radio-button>
+          <mat-radio-button class="example-margin" value="blue">
+            Blue
+          </mat-radio-button>
+          <mat-radio-button class="example-margin" value="purple">
+            Purple
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-radio-button class="example-margin" value="teal">
+          Teal
+        </mat-radio-button>
 
 
       <div>
@@ -77,7 +99,7 @@
 
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Tank 2 Abilities </ng-template>
+      <ng-template matStepLabel>Abilities </ng-template>
       <mat-radio-group  [(ngModel)]="data.tankTwoPower"  [ngModelOptions]="{standalone: true}"a >
         <mat-radio-button class="example-margin" value="fastMove">
           Faster moving
@@ -87,6 +109,29 @@
         </mat-radio-button>
         <mat-radio-button class="example-margin" value="moreHealth">
           More Health
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Color </ng-template>
+      <mat-radio-group  [(ngModel)]="data.tankTwoColor"  [ngModelOptions]="{standalone: true}"a >
+        <mat-radio-button class="example-margin" value="green">
+          Green
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="blue">
+          Blue
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="purple">
+          Purple
+        </mat-radio-button>
+        <mat-radio-button class="example-margin" value="teal">
+          Teal
         </mat-radio-button>
       </mat-radio-group>
       <div>

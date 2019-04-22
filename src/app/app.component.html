@@ -4,12 +4,14 @@
 
 </div>
 <div class="healthStats"  >
+
+  <div class="topTank">
   <mat-card class="cardTankOne">
       <mat-card-content>
-        <h2 class="example-h2">Tank 1 </h2>
+        <h2 class="example-h2">Tank 1: {{ this.tankOneName }} </h2>
     
         <section class="example-section" *ngIf="mode === 'determinate' || mode === 'buffer'">
-          <label class="example-margin">Points: 5  </label>
+       <!--   <label class="example-margin">Points: 5  </label> -->
         <!--≈  <mat-slider class="example-margin" [(ngModel)]="tank1value"></mat-slider> -->
         </section>
       </mat-card-content>
@@ -24,21 +26,21 @@
               class="example-margin"
               [color]="color"
               [mode]="mode"
-              [value]="tank1value"
+              [value]="tankOneValue"
               [bufferValue]="tank1bufferValue">
           </mat-progress-bar>
         </section>
       </mat-card-content>
     </mat-card>
+  </div>
 
-
+  <div class="bottomTank">
     <mat-card class="cardTankTwo">
         <mat-card-content>
-          <h2 class="example-h2">Tank 2 </h2>
+          <h2 class="example-h2">Tank 2: {{ this.tankTwoName }} </h2>
       
       
           <section class="example-section" *ngIf="mode === 'determinate' || mode === 'buffer'">
-            <label class="example-margin">Points: 2  </label>
            <!-- <mat-slider class="example-margin" [(ngModel)]="tank2value"></mat-slider> -->
           </section>
         </mat-card-content>
@@ -53,16 +55,17 @@
                 class="example-margin"
                 [color]="color"
                 [mode]="mode"
-                [value]="tank2value"
+                [value]="tankTwoValue"
                 [bufferValue]="bufferValue">
             </mat-progress-bar>
           </section>
         </mat-card-content>
       </mat-card>
     </div>
+    </div>
 
       <button mat-raised-button (click)="openDialog()"> Reset </button>
-      <button mat-raised-button (click)="testConnection()"> testConnect </button>
+      <button mat-raised-button (click)="startConnection()"> Sync </button>
       <mat-icon>home</mat-icon>
   
   

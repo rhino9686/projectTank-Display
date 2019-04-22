@@ -15,12 +15,21 @@
 
 .cardTankOne {
   background-color:whitesmoke;
+  
 }
 
 .cardTankTwo {
   background-color:whitesmoke;
 }
 
+.topTank {
+  padding-bottom: 20px; 
+  padding-right: 10px;
+}
+
+.bottomTank {
+  padding-right: 10px;
+}
 .button {
   background-color:whitesmoke;
   

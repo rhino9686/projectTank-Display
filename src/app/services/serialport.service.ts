@@ -24,20 +24,25 @@ export class SerialportService {
     this.tankTwoSubject = new Subject<number>();
   }
 
+
   // Starts polling the server for tank health
   activate(): void {
+    if ( this.isActive ) {
+      return;
+    }
+
     this.isActive = true;
-    this.tankOneTimer = interval(2000).subscribe(
+    this.tankOneTimer = interval(1000).subscribe(
       (val) => { this.getTankOneHealth('one').subscribe(
          (data) => {this.tankOneSubject.next(data);
         });
       });
 
-     /* this.tankTwoTimer = interval(1000).subscribe(
+      this.tankTwoTimer = interval(1000).subscribe(
         (val) => { this.getTankTwoHealth('two').subscribe(
            (data) => {this.tankTwoSubject.next(data);
           });
-        });*/
+        });
 
   }
   // Stops polling the server for tank health
@@ -49,8 +54,6 @@ export class SerialportService {
     this.tankTwoTimer = null;
     this.isActive = false;
   }
-
-
 
 
   getTankOneHealth(name: string): Observable<number> {

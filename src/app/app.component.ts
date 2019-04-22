@@ -13,6 +13,8 @@ export interface DialogData {
   tankOnePower: string;
   tankTwoName: string;
   tankTwoPower: string;
+  tankOneColor: string;
+  tankTwoColor: string;
 }
 
 @Component({
@@ -22,18 +24,13 @@ export interface DialogData {
 })
 export class AppComponent implements OnInit {
   title = 'Lil Tanks';
-  catString = 'nothing yet!';
-  mycats: Observable<Cat[]>;
-  cats: Cat[];
-  mycat: Cat;
-  setup: Setup;
 
 
   // Health Bar Settings
   color = 'warn';
   mode = 'determinate';
-  tank1value = 75;
-  tank2value = 50;
+  tankOneValue = 75;
+  tankTwoValue = 50;
   tank1bufferValue = 75;
 
   // Tank Parameters
@@ -41,9 +38,8 @@ export class AppComponent implements OnInit {
   tankOnePower: string;
   tankTwoName: string;
   tankTwoPower: string;
-
-
-
+  tankOneColor: string;
+  tankTwoColor: string;
 
   constructor( public dialog: MatDialog, private serialservice: SerialportService, private snackbar: MatSnackBar) {
 
@@ -56,10 +52,10 @@ export class AppComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
-      width: '900px',
+      width: '1200px',
       height: '550px',
       data: {tankOneName: this.tankOneName , tankOnePower: this.tankOnePower, tankTwoName: this.tankTwoName,
-         tankTwoPower: this.tankTwoPower
+         tankTwoPower: this.tankTwoPower, tankOneColor: this.tankOneColor, tankTwoColor: this.tankTwoColor
       }
     });
 
@@ -70,6 +66,9 @@ export class AppComponent implements OnInit {
       this.tankTwoName = result.tankTwoName;
       this.tankOnePower = result.tankOnePower;
       this.tankTwoPower = result.tankTwoPower;
+      this.tankOneColor = result.tankOneColor;
+      this.tankTwoColor = result.tankTwoColor;
+      this.printTankData();
     });
 
    }
@@ -80,16 +79,25 @@ export class AppComponent implements OnInit {
     console.log('Tank Two Name: ' + this.tankTwoName);
     console.log('Tank One Power ' + this.tankOnePower);
     console.log('Tank Two Power: ' + this.tankTwoPower);
+    console.log('Tank One Color ' + this.tankOneColor);
+    console.log('Tank Two Color: ' + this.tankTwoColor);
   }
   updateTankOne(healthObj: any ) {
       const num = healthObj['health'];
       console.log(num);
-      this.tank1value = num;
+      if (num <= 0) {
+        this.tankTwoWins();
+      }
+      this.tankOneValue = num;
   }
 
   updateTankTwo(healthObj: any ) {
     const num = healthObj['health'];
     console.log(num);
+    if (num <= 0) {
+      this.tankOneWins();
+    }
+    this.tankTwoValue = num;
   }
 
 
@@ -101,46 +109,90 @@ export class AppComponent implements OnInit {
 
   initTankOne() {
     let powType = -3;
+    let colorType = -3;
 
     if (this.tankOnePower === 'moreHealth') {
-      powType = 1;
-    } else if (this.tankOnePower === 'fastMove') {
-      powType = 2;
-    } else if (this.tankOnePower === 'fastAim') {
       powType = 3;
+    } else if (this.tankOnePower === 'fastMove') {
+      powType = 1;
+    } else if (this.tankOnePower === 'fastAim') {
+      powType = 2;
     }
+
+    if (this.tankOneColor === 'green') {
+      colorType = 1;
+    } else if (this.tankOneColor === 'blue') {
+      colorType = 2;
+    } else if (this.tankOneColor === 'purple') {
+      colorType = 3;
+    } else if (this.tankOneColor === 'teal') {
+      colorType = 4;
+   }
+
+
     if (powType < 0) {
       console.log('ERROR: no power choice for tank one!');
       return;
     }
+    if (colorType < 0) {
+      console.log('ERROR: no color choice for tank one!');
+      return;
+    }
 
-    this.setup = { type: powType };
-    this.serialservice.sendSetupTankOne(this.setup).subscribe((res) => {console.log(res); });
+    const setup: Setup = { type: powType, color: colorType };
+    this.serialservice.sendSetupTankOne(setup).subscribe((val) => console.log(val) );
   }
 
   initTankTwo() {
     let powType = -3;
+    let colorType = -3;
 
     if (this.tankTwoPower === 'moreHealth') {
       powType = 1;
     } else if (this.tankTwoPower === 'fastMove') {
-      powType = 2;
-    } else if (this.tankTwoPower === 'fastAim') {
       powType = 3;
+    } else if (this.tankTwoPower === 'fastAim') {
+      powType = 2;
     }
+
+
+    if (this.tankTwoColor === 'green') {
+      colorType = 1;
+    } else if (this.tankTwoColor === 'blue') {
+      colorType = 2;
+    } else if (this.tankTwoColor === 'purple') {
+      colorType = 3;
+    } else if (this.tankTwoColor === 'teal') {
+      colorType = 4;
+  }
+
+
     if (powType < 0) {
       console.log('ERROR: no power choice for tank two!');
       return;
     }
+    if (colorType < 0) {
+      console.log('ERROR: no color choice for tank two!');
+      return;
+    }
 
-    this.setup = { type: powType };
-    this.serialservice.sendSetupTankTwo(this.setup);
+    const setup: Setup = { type: powType, color: colorType };
+    this.serialservice.sendSetupTankTwo(setup).subscribe((val) => console.log(val) );
   }
 
-  testConnection() {
+  startConnection() {
+    console.log('hi');
      // this.serialservice.getTankOneHealth('yeet').subscribe((val) => console.log(val) );
     //  this.serialservice.activate();
-    this.initTankOne();
+    this.initTanks();
+  }
+
+  tankOneWins() {
+
+  }
+
+  tankTwoWins() {
+
   }
 
 }
@@ -164,6 +216,7 @@ export class DialogOverviewComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit() {
+    this.data.tankOneName = '';
     this.firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
         color: ['' , Validators.required]
