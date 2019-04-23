@@ -158,9 +158,9 @@ export class AppComponent implements OnInit {
     let colorType = -3;
 
     if (this.tankTwoPower === 'moreHealth') {
-      powType = 1;
-    } else if (this.tankTwoPower === 'fastMove') {
       powType = 3;
+    } else if (this.tankTwoPower === 'fastMove') {
+      powType = 1;
     } else if (this.tankTwoPower === 'fastAim') {
       powType = 2;
     }
@@ -195,6 +195,7 @@ export class AppComponent implements OnInit {
      // this.serialservice.getTankOneHealth('yeet').subscribe((val) => console.log(val) );
     //  this.serialservice.activate();
     this.initTanks();
+    this.gameDone = false;
   }
 
   tankOneWins() {
