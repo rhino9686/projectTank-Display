@@ -1,4 +1,4 @@
-# DisplayProject
+# Project Tank: Display Component
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
@@ -6,6 +6,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This project is a companion to https://github.com/rhino9686/projectTank and https://github.com/rhino9686/projectTank-server.
 
 It is a GUI written in the Angular framework to allow users to interact with the tanks, and see the status of their health and power-ups.
+
+
+## Screenshots
+<img width="843" alt="setupOne" src="https://user-images.githubusercontent.com/41589697/57893493-201c1800-7811-11e9-8279-f3ddd5660ae8.png">
+
+<img width="714" alt="setupTwo" src="https://user-images.githubusercontent.com/41589697/57893653-bea87900-7811-11e9-8c57-f19ac939bc1e.png">
+
+
+<img width="714" alt="setupThree" src="https://user-images.githubusercontent.com/41589697/57893670-ccf69500-7811-11e9-94cb-a28b3ffd3810.png">
+
+
+<img width="714" alt="gameplay" src="https://user-images.githubusercontent.com/41589697/57893680-d8e25700-7811-11e9-842e-8db3e0ada71e.png">
+
+
 
 ## Usage
 
