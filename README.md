@@ -9,7 +9,7 @@ It is a GUI written in the Angular framework to allow users to interact with the
 
 
 ## Screenshots
-<img width="843" alt="setupOne" src="https://user-images.githubusercontent.com/41589697/57893493-201c1800-7811-11e9-8279-f3ddd5660ae8.png">
+<img width="714" alt="setupOne" src="https://user-images.githubusercontent.com/41589697/57893803-48584680-7812-11e9-8f06-ff1549c7ce0f.png">
 
 <img width="714" alt="setupTwo" src="https://user-images.githubusercontent.com/41589697/57893653-bea87900-7811-11e9-8c57-f19ac939bc1e.png">
 
